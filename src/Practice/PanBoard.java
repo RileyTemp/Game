@@ -14,9 +14,10 @@ import javax.swing.*;
 public class PanBoard extends JPanel implements ActionListener {
 
     static boolean drawn = false;
-    Rectangle rB, rE, rP; // rectangles for the 3 sprites.
+    Rectangle rB, rE, rP, rH; // rectangles for the 3 sprites.
     private Player p;
     private Enemy e;
+    private Enemy2 h;
     private Timer timer;
     private Image background;
     static String sName;
@@ -27,6 +28,7 @@ public class PanBoard extends JPanel implements ActionListener {
         //super();
         p = new Player();
         e = new Enemy();
+        h = new Enemy2();
         addKeyListener(new Movement());
         setFocusable(true);
         ImageIcon i1 = new ImageIcon("Background.png");
@@ -48,16 +50,18 @@ public class PanBoard extends JPanel implements ActionListener {
         g2d.drawImage(background, 0, 0, null);
         g2d.drawImage(p.getImage(), p.getX(), p.getY(), null);
         g2d.drawImage(e.getImage(), e.getX(), e.getY(), null);
+        g2d.drawImage(h.getImage(), h.getX(), h.getY(), null);
         isHit();
     }
 
     boolean isHit() {
         rB = p.getRect();
         rE = e.getRect();
+        rH = h.getRect();
         if (rB.intersects(rE)) {
             System.out.println("HIT");
             return true;
-            
+
         } else {
             return false;
         }
